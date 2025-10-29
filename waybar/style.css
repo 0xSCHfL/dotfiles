@@ -1,0 +1,134 @@
+* {
+  font-family: JetbrainsMono Nerd Font;
+  font-size: 10px;
+  min-height: 0;
+  padding: 0 2px;
+}
+
+/* Bar background */
+#waybar {
+  background: transparent;
+  color: #c6d0f5;
+  margin: 2px;
+}
+
+/* ─────── LEFT: WORKSPACES ─────── */
+#workspaces {
+  background: #101010;
+  border-radius: 5px;
+  margin: 5px 0 5px 5px;
+  padding: 0 4px;
+}
+#workspaces button {
+  color: #babbf1;
+  padding: 0 0.4rem;
+  border-radius: 5px;
+}
+#workspaces button.active { color: #99d1db; }
+#workspaces button:hover { background: #1e1e1e; }
+
+#window {
+  background: #101010;
+  color: #a6d189;
+  border-radius: 5px;
+  margin: 5px 8px;
+  padding: 0.4rem 0.8rem;
+  font-size: 10px;
+}
+
+#window:hover {
+  background: #1e1e1e;
+  color: #ffffff;
+}
+/* ─────── CENTER: WEATHER ONLY ─────── */
+#custom-weather {
+  background: #101010;
+  color: #8caaee;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  margin: 5px 8px;
+}
+
+/* ─────── RIGHT BAR: ALL MODULES ─────── */
+#pulseaudio,
+#network,
+#bluetooth,
+#cpu,
+#memory,
+#custom-uptime,
+#backlight,
+#battery,
+#clock,
+#tray,
+#custom-lock {
+  background: #101010;
+  padding: 0.3rem 0.6rem;
+  margin: 2px 0;
+}
+
+/* Pulseaudio (rounded left) */
+#pulseaudio {
+  color: #ea999c;
+  border-radius: 5px 0 0 5px;
+  margin-left: 5px;
+}
+
+/* Network + Bluetooth */
+#network,
+#bluetooth {
+  color: #ffffff;
+  border-radius: 0;
+}
+#network { margin-left: 0; }
+#bluetooth { margin-left: 0; margin-right: 0; }
+
+/* CPU, Memory, Docker */
+#cpu { color: #e5c890; }
+#memory { color: #a6d189; }
+
+/* Clock */
+#clock {
+  background: #101010;
+  color: #8caaee;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  margin: 5px 8px 5px 5px;  /* adjust spacing with memory */
+}
+
+/* NEW: Uptime, Brightness, Battery */
+#custom-uptime { color: #f2d5cf; }  /* soft peach */
+#backlight     { color: #e0c090; }  /* warm yellow */
+#battery       { color: #99d1db; }  /* soft blue */
+
+/* Tray & Lock (rounded right) */
+#tray { margin-left: 0; }
+#custom-lock {
+  color: #babbf1;
+  border-radius: 0 5px 5px 0;
+  margin-right: 5px;
+}
+
+/* Hover for all right-bar items */
+#pulseaudio:hover,
+#network:hover,
+#bluetooth:hover,
+#cpu:hover,
+#memory:hover,
+#custom-uptime:hover,
+#backlight:hover,
+#battery:hover,
+#clock:hover,
+#custom-lock:hover {
+  background: #1e1e1e;
+}
+
+/* Disabled / Disconnected */
+#network.disconnected,
+#bluetooth.disabled {
+  color: #737994;
+}
+
+/* Battery states */
+#battery.charging   { color: #a6d189; }
+#battery.full       { color: #99d1db; }
+#battery.critical   { color: #ea999c; }
