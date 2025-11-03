@@ -1,6 +1,6 @@
 * {
   font-family: JetbrainsMono Nerd Font;
-  font-size: 10px;
+  font-size: 12px;
   min-height: 0;
   padding: 0 2px;
 }
@@ -12,7 +12,7 @@
   margin: 2px;
 }
 
-/* ─────── LEFT: WORKSPACES ─────── */
+/* ─────── LEFT BAR: WORKSPACES + MPRIS ─────── */
 #workspaces {
   background: #101010;
   border-radius: 5px;
@@ -27,102 +27,105 @@
 #workspaces button.active { color: #99d1db; }
 #workspaces button:hover { background: #1e1e1e; }
 
-#window {
+#custom-spotify {
   background: #101010;
-  color: #a6d189;
+  color: #8caaee;    /* Soft blue */
+  padding: 0.3rem 0.6rem;
+  margin: 5px 0 5px 5px;
   border-radius: 5px;
-  margin: 5px 8px;
-  padding: 0.4rem 0.8rem;
-  font-size: 10px;
 }
 
-#window:hover {
+#custom-spotify:hover {
   background: #1e1e1e;
-  color: #ffffff;
 }
-/* ─────── CENTER: WEATHER ONLY ─────── */
+
+/* ─────── CENTER BAR: CLOCK + WEATHER ─────── */
+#clock {
+  background: #101010;
+  color: #8caaee;    /* Soft blue */
+  padding: 0.3rem 0.6rem;
+  border-radius: 5px;
+  margin: 5px 8px 5px 5px;
+}
+
 #custom-weather {
   background: #101010;
   color: #8caaee;
-  padding: 0.5rem 1rem;
+  padding: 0.3rem 0.6rem;
   border-radius: 5px;
   margin: 5px 8px;
 }
 
 /* ─────── RIGHT BAR: ALL MODULES ─────── */
+#custom-uptime,
+#backlight,
+#battery,
 #pulseaudio,
 #network,
 #bluetooth,
 #cpu,
 #memory,
-#custom-uptime,
-#backlight,
-#battery,
-#clock,
 #tray,
 #custom-lock {
   background: #101010;
   padding: 0.3rem 0.6rem;
-  margin: 2px 0;
+  margin: 5px 0;
+  border-radius: 0;      /* reset border-radius for all except ends */
+  color: inherit;
 }
 
-/* Pulseaudio (rounded left) */
-#pulseaudio {
-  color: #ea999c;
+/* Rounded left corners only on first right module */
+#custom-uptime {
   border-radius: 5px 0 0 5px;
-  margin-left: 5px;
+  margin-right: 0;
+  color: #f2d5cf;  /* soft peach */
 }
 
-/* Network + Bluetooth */
+/* Remove margin-right/left to remove gaps between modules */
+#backlight,
+#battery,
+#pulseaudio,
 #network,
-#bluetooth {
-  color: #ffffff;
-  border-radius: 0;
-}
-#network { margin-left: 0; }
-#bluetooth { margin-left: 0; margin-right: 0; }
-
-/* CPU, Memory, Docker */
-#cpu { color: #e5c890; }
-#memory { color: #a6d189; }
-
-/* Clock */
-#clock {
-  background: #101010;
-  color: #8caaee;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  margin: 5px 8px 5px 5px;  /* adjust spacing with memory */
+#bluetooth,
+#cpu,
+#memory,
+#tray {
+  margin-left: 0;
+  margin-right: 0;
 }
 
-/* NEW: Uptime, Brightness, Battery */
-#custom-uptime { color: #f2d5cf; }  /* soft peach */
+/* Colors for individual right modules */
 #backlight     { color: #e0c090; }  /* warm yellow */
 #battery       { color: #99d1db; }  /* soft blue */
+#pulseaudio    { color: #ea999c; }
+#network,
+#bluetooth    { color: #ffffff; }
+#cpu           { color: #e5c890; }
+#memory        { color: #a6d189; }
 
-/* Tray & Lock (rounded right) */
-#tray { margin-left: 0; }
+/* Rounded right corners only on last right module */
 #custom-lock {
-  color: #babbf1;
   border-radius: 0 5px 5px 0;
+  margin-left: 0;
   margin-right: 5px;
+  color: #babbf1;
 }
 
-/* Hover for all right-bar items */
+/* Hover effect for all right bar modules */
+#custom-uptime:hover,
+#backlight:hover,
+#battery:hover,
 #pulseaudio:hover,
 #network:hover,
 #bluetooth:hover,
 #cpu:hover,
 #memory:hover,
-#custom-uptime:hover,
-#backlight:hover,
-#battery:hover,
-#clock:hover,
+#tray:hover,
 #custom-lock:hover {
   background: #1e1e1e;
 }
 
-/* Disabled / Disconnected */
+/* Disabled / Disconnected colors */
 #network.disconnected,
 #bluetooth.disabled {
   color: #737994;
@@ -132,3 +135,23 @@
 #battery.charging   { color: #a6d189; }
 #battery.full       { color: #99d1db; }
 #battery.critical   { color: #ea999c; }
+
+/* Tray */
+#tray {
+  margin: 5px 0;
+}
+
+/* Window module */
+#window {
+  background: #101010;
+  color: #a6d189;
+  border-radius: 5px;
+  margin: 5px 8px;
+  padding: 0.4rem 0.8rem;
+  font-size: 10px;
+}
+#window:hover {
+  background: #1e1e1e;
+  color: #ffffff;
+}
+
