@@ -44,6 +44,21 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	end,
 })
 
+-- Auto-create directories when saving a file
+local auto_create_dir_group = vim.api.nvim_create_augroup("AutoCreateDir", {})
+vim.api.nvim_create_autocmd("BufWritePre", {
+	group = auto_create_dir_group,
+	callback = function(ctx)
+		if ctx.match:match("^%w%w+:[//]") then
+			return
+		end
+		local dir = vim.fn.fnamemodify(ctx.file, ":p:h")
+		if vim.fn.isdirectory(dir) == 0 then
+			vim.fn.mkdir(dir, "p")
+		end
+	end,
+})
+
 -- on attach function shortcuts
 local lsp_on_attach_group = vim.api.nvim_create_augroup("LspMappings", {})
 vim.api.nvim_create_autocmd("LspAttach", {
