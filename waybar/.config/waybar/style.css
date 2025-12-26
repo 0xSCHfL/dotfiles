@@ -1,35 +1,43 @@
 * {
-  font-family: JetbrainsMono Nerd Font;
-  font-size: 12px;
+  font-family: 'Iosevka Fixed';
+  font-size: 13px;
   min-height: 0;
-  padding: 0 2px;
+  padding: 0 1px;
 }
 
 /* Bar background */
 #waybar {
   background: transparent;
   color: #c6d0f5;
-  margin: 2px;
+  margin: 1px;
 }
 
 /* ─────── LEFT BAR: WORKSPACES + MPRIS ─────── */
+#custom-omarchy,
 #workspaces {
   background: #101010;
   border-radius: 5px;
   margin: 5px 0 5px 5px;
   padding: 0 4px;
 }
+
 #workspaces button {
   color: #babbf1;
   padding: 0 0.4rem;
   border-radius: 5px;
 }
-#workspaces button.active { color: #99d1db; }
-#workspaces button:hover { background: #1e1e1e; }
+
+#workspaces button.active {
+  color: #99d1db;
+}
+
+#workspaces button:hover {
+  background: #1e1e1e;
+}
 
 #custom-spotify {
   background: #101010;
-  color: #8caaee;    /* Soft blue */
+  color: #8caaee; /* Soft blue */
   padding: 0.3rem 0.6rem;
   margin: 5px 0 5px 5px;
   border-radius: 5px;
@@ -42,10 +50,23 @@
 /* ─────── CENTER BAR: CLOCK + WEATHER ─────── */
 #clock {
   background: #101010;
-  color: #8caaee;    /* Soft blue */
+  color: #8caaee; /* Soft blue */
   padding: 0.3rem 0.6rem;
   border-radius: 5px;
   margin: 5px 8px 5px 5px;
+}
+
+#custom-update {
+  background: #101010;
+  color: #8caaee;
+  padding: 0.3rem 0.6rem;
+  border-radius: 5px;
+  margin: 5px 8px;
+}
+
+#custom-update:hover {
+  background: #1e1e1e;
+  color: #babbf1;
 }
 
 #custom-weather {
@@ -56,12 +77,13 @@
   margin: 5px 8px;
 }
 
+
 /* ─────── RIGHT BAR: ALL MODULES ─────── */
 #custom-uptime,
 #backlight,
 #battery,
 #pulseaudio,
-#network,
+#custom-network,
 #bluetooth,
 #cpu,
 #memory,
@@ -70,7 +92,7 @@
   background: #101010;
   padding: 0.3rem 0.6rem;
   margin: 5px 0;
-  border-radius: 0;      /* reset border-radius for all except ends */
+  border-radius: 0; /* reset border-radius for all except ends */
   color: inherit;
 }
 
@@ -78,14 +100,14 @@
 #custom-uptime {
   border-radius: 5px 0 0 5px;
   margin-right: 0;
-  color: #f2d5cf;  /* soft peach */
+  color: #f2d5cf; /* soft peach */
 }
 
 /* Remove margin-right/left to remove gaps between modules */
 #backlight,
 #battery,
 #pulseaudio,
-#network,
+#custom-network,
 #bluetooth,
 #cpu,
 #memory,
@@ -95,13 +117,33 @@
 }
 
 /* Colors for individual right modules */
-#backlight     { color: #e0c090; }  /* warm yellow */
-#battery       { color: #99d1db; }  /* soft blue */
-#pulseaudio    { color: #ea999c; }
-#network,
-#bluetooth    { color: #ffffff; }
-#cpu           { color: #e5c890; }
-#memory        { color: #a6d189; }
+#backlight {
+  color: #e0c090; /* warm yellow */
+}
+
+#battery {
+  color: #99d1db; /* soft blue */
+}
+
+#pulseaudio {
+  color: #ea999c; /* soft red/pink */
+}
+
+#custom-network {
+  color: #ffffff; /* white */
+}
+
+#bluetooth {
+  color: #6ab0f3; /* light blue */
+}
+
+#cpu {
+  color: #e5c890; /* beige */
+}
+
+#memory {
+  color: #a6d189; /* soft green */
+}
 
 /* Rounded right corners only on last right module */
 #custom-lock {
@@ -116,25 +158,37 @@
 #backlight:hover,
 #battery:hover,
 #pulseaudio:hover,
-#network:hover,
+#custom-network:hover,
 #bluetooth:hover,
 #cpu:hover,
 #memory:hover,
 #tray:hover,
 #custom-lock:hover {
   background: #1e1e1e;
+  color: #ffffff;
 }
 
 /* Disabled / Disconnected colors */
-#network.disconnected,
+#custom-network.disconnected {
+  color: #737994; /* softer grey for disconnected */
+}
+
 #bluetooth.disabled {
   color: #737994;
 }
 
 /* Battery states */
-#battery.charging   { color: #a6d189; }
-#battery.full       { color: #99d1db; }
-#battery.critical   { color: #ea999c; }
+#battery.charging {
+  color: #a6d189;
+}
+
+#battery.full {
+  color: #99d1db;
+}
+
+#battery.critical {
+  color: #ea999c;
+}
 
 /* Tray */
 #tray {
@@ -150,6 +204,7 @@
   padding: 0.4rem 0.8rem;
   font-size: 10px;
 }
+
 #window:hover {
   background: #1e1e1e;
   color: #ffffff;
