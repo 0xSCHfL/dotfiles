@@ -1,104 +1,3 @@
-# If not running interactively, don't do anything (leave this at the top of this file)
-[[ $- != *i* ]] && return
-
-#!/usr/bin/env bash
-iatest=$(expr index "$-" i)
-#######################################################
-# SOURCED ALIAS'S AND SCRIPTS BY zachbrowne.me
-#######################################################
-if [ -f /usr/bin/fastfetch ]; then
-	fastfetch
-fi
-
-# Source global definitions
-if [ -f /etc/bashrc ]; then
-	. /etc/bashrc
-fi
-
-# Enable bash programmable completion features in interactive shells
-if [ -f /usr/share/bash-completion/bash_completion ]; then
-	. /usr/share/bash-completion/bash_completion
-elif [ -f /etc/bash_completion ]; then
-	. /etc/bash_completion
-fi
-
-# Load pywal
-(cat ~/.cache/wal/sequences &)
-#######################################################
-# EXPORTS
-#######################################################
-
-# Disable the bell
-if [[ $iatest -gt 0 ]]; then bind "set bell-style visible"; fi
-
-# Expand the history size
-export HISTFILESIZE=10000
-export HISTSIZE=600
-export HISTTIMEFORMAT="%F %T" # add timestamp to history
-
-# Don't put duplicate lines in the history and do not add lines that start with a space
-export HISTCONTROL=erasedups:ignoredups:ignorespace
-
-# Check the window size after each command and, if necessary, update the values of LINES and COLUMNS
-shopt -s checkwinsize
-
-# Causes bash to append to history instead of overwriting it so if you start a new terminal, you have old session history
-shopt -s histappend
-PROMPT_COMMAND='history -a'
-
-# set up XDG folders
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_STATE_HOME="$HOME/.local/state"
-export XDG_CACHE_HOME="$HOME/.cache"
-
-# Seeing as other scripts will use it might as well export it
-export LINUXTOOLBOXDIR="$HOME/linuxtoolbox"
-
-# Allow ctrl-S for history navigation (with ctrl-R)
-[[ $- == *i* ]] && stty -ixon
-
-# Ignore case on auto-completion
-# Note: bind used instead of sticking these in .inputrc
-if [[ $iatest -gt 0 ]]; then bind "set completion-ignore-case on"; fi
-
-# Show auto-completion list automatically, without double tab
-if [[ $iatest -gt 0 ]]; then bind "set show-all-if-ambiguous On"; fi
-
-# Set up fzf key bindings and fuzzy completion
-eval "$(fzf --bash)"
-
-# Set the default editor
-export EDITOR=nvim
-export VISUAL=nvim
-alias spico='sudo pico'
-alias snano='sudo nano'
-alias vim='nvim'
-
-# To have colors for ls and all grep commands such as grep, egrep and zgrep
-export CLICOLOR=1
-export LS_COLORS='no=00:fi=00:di=00;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.ogg=01;35:*.mp3=01;35:*.wav=01;35:*.xml=00;31:'
-#export GREP_OPTIONS='--color=auto' #deprecated
-
-# Check if ripgrep is installed
-if command -v rg &> /dev/null; then
-    # Alias grep to rg if ripgrep is installed
-    alias grep='rg'
-else
-    # Alias grep to /usr/bin/grep with GREP_OPTIONS if ripgrep is not installed
-    alias grep="/usr/bin/grep $GREP_OPTIONS"
-fi
-unset GREP_OPTIONS
-
-# Color for manpages in less makes manpages a little easier to read
-export LESS_TERMCAP_mb=$'\E[01;31m'
-export LESS_TERMCAP_md=$'\E[01;31m'
-export LESS_TERMCAP_me=$'\E[0m'
-export LESS_TERMCAP_se=$'\E[0m'
-export LESS_TERMCAP_so=$'\E[01;44;33m'
-export LESS_TERMCAP_ue=$'\E[0m'
-export LESS_TERMCAP_us=$'\E[01;32m'
-
 #######################################################
 # MACHINE SPECIFIC ALIAS'S
 #######################################################
@@ -108,12 +7,9 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 alias callexpat='ssh -p 3202 root@142.132.160.246'
 alias vocallremote='ssh -p 7202 root@188.34.199.50'
 alias ais='ssh -p 7264 sadhg@195.201.130.179'
-alias kb='ssh -p 2520 root@49.13.236.152'
+alias kb='ssh -p 2520 sadhg@49.13.236.152'
 alias fw='ssh -p 3920 root@5.75.147.151'
 alias crm='ssh -p 4810 root@91.98.140.68'
-
-# Alias's to change the directory
-alias web='cd /var/www/html'
 
 # Alias's to mount ISO files
 # mount -o loop /home/NAMEOFISO.iso /home/ISOMOUNTDIR/
@@ -209,6 +105,9 @@ alias topcpu="/bin/ps -eo pcpu,pid,user,args | sort -k 1 -r | head -10"
 alias f="find . | grep "
 alias ff='fzf --preview="bat --color=always {}"'
 
+# Yazi
+alias y="yazi"
+
 # Count all files (recursively) in the current folder
 alias countfiles="for t in files links directories; do echo \`find . -type \${t:0:1} | wc -l\` \$t; done 2> /dev/null"
 
@@ -287,16 +186,16 @@ extract() {
 }
 
 # Searches for text in all files in the current folder
-ftext() {
-	# -i case-insensitive
-	# -I ignore binary files
-	# -H causes filename to be printed
-	# -r recursive search
-	# -n causes line number to be printed
-	# optional: -F treat search term as a literal, not a regular expression
-	# optional: -l only print filenames and not the matching lines ex. grep -irl "$1" *
-	grep -iIHrn --color=always "$1" . | less -r
-}
+# ftext() {
+# 	# -i case-insensitive
+# 	# -I ignore binary files
+# 	# -H causes filename to be printed
+# 	# -r recursive search
+# 	# -n causes line number to be printed
+# 	# optional: -F treat search term as a literal, not a regular expression
+# 	# optional: -l only print filenames and not the matching lines ex. grep -irl "$1" *
+# 	# grep -iIHrn --color=always "$1" . | less -r
+# }
 
 # Copy file with a progress bar
 cpp() {
@@ -485,13 +384,13 @@ install_bashrc_support() {
 
 	case $dtype in
 		"redhat")
-			sudo yum install multitail tree zoxide trash-cli fzf bash-completion fastfetch neovim ncdu yazi
+			sudo yum install multitail tree zoxide trash-cli fzf bash-completion fastfetch
 			;;
 		"suse")
-			sudo zypper install multitail tree zoxide trash-cli fzf bash-completion fastfetch neovim ncdu yazi
+			sudo zypper install multitail tree zoxide trash-cli fzf bash-completion fastfetch
 			;;
 		"debian")
-			sudo apt-get install multitail tree zoxide trash-cli fzf bash-completion ncdu neovim
+			sudo apt-get install multitail tree zoxide trash-cli fzf bash-completion
 			# Fetch the latest fastfetch release URL for linux-amd64 deb file
 			FASTFETCH_URL=$(curl -s https://api.github.com/repos/fastfetch-cli/fastfetch/releases/latest | grep "browser_download_url.*linux-amd64.deb" | cut -d '"' -f 4)
 
@@ -502,7 +401,7 @@ install_bashrc_support() {
 			sudo apt-get install /tmp/fastfetch_latest_amd64.deb
 			;;
 		"arch")
-			sudo paru multitail tree zoxide trash-cli fzf bash-completion fastfetch ncdu neovim yazi
+			sudo paru multitail tree zoxide trash-cli fzf bash-completion fastfetch
 			;;
 		"slackware")
 			echo "No install support for Slackware"
@@ -529,6 +428,69 @@ function whatsmyip () {
     echo -n "External IP: "
     curl -4 ifconfig.me
 }
+
+# View Apache logs
+apachelog() {
+	if [ -f /etc/httpd/conf/httpd.conf ]; then
+		cd /var/log/httpd && ls -xAh && multitail --no-repeat -c -s 2 /var/log/httpd/*_log
+	else
+		cd /var/log/apache2 && ls -xAh && multitail --no-repeat -c -s 2 /var/log/apache2/*.log
+	fi
+}
+
+# Edit the Apache configuration
+apacheconfig() {
+	if [ -f /etc/httpd/conf/httpd.conf ]; then
+		sedit /etc/httpd/conf/httpd.conf
+	elif [ -f /etc/apache2/apache2.conf ]; then
+		sedit /etc/apache2/apache2.conf
+	else
+		echo "Error: Apache config file could not be found."
+		echo "Searching for possible locations:"
+		sudo updatedb && locate httpd.conf && locate apache2.conf
+	fi
+}
+
+# Edit the PHP configuration file
+phpconfig() {
+	if [ -f /etc/php.ini ]; then
+		sedit /etc/php.ini
+	elif [ -f /etc/php/php.ini ]; then
+		sedit /etc/php/php.ini
+	elif [ -f /etc/php5/php.ini ]; then
+		sedit /etc/php5/php.ini
+	elif [ -f /usr/bin/php5/bin/php.ini ]; then
+		sedit /usr/bin/php5/bin/php.ini
+	elif [ -f /etc/php5/apache2/php.ini ]; then
+		sedit /etc/php5/apache2/php.ini
+	else
+		echo "Error: php.ini file could not be found."
+		echo "Searching for possible locations:"
+		sudo updatedb && locate php.ini
+	fi
+}
+
+# Edit the MySQL configuration file
+mysqlconfig() {
+	if [ -f /etc/my.cnf ]; then
+		sedit /etc/my.cnf
+	elif [ -f /etc/mysql/my.cnf ]; then
+		sedit /etc/mysql/my.cnf
+	elif [ -f /usr/local/etc/my.cnf ]; then
+		sedit /usr/local/etc/my.cnf
+	elif [ -f /usr/bin/mysql/my.cnf ]; then
+		sedit /usr/bin/mysql/my.cnf
+	elif [ -f ~/my.cnf ]; then
+		sedit ~/my.cnf
+	elif [ -f ~/.my.cnf ]; then
+		sedit ~/.my.cnf
+	else
+		echo "Error: my.cnf file could not be found."
+		echo "Searching for possible locations:"
+		sudo updatedb && locate my.cnf
+	fi
+}
+
 
 # Trim leading and trailing spaces (for scripts)
 trim() {
@@ -584,20 +546,6 @@ if [[ $- == *i* ]]; then
     bind '"\C-f":"zi\n"'
 fi
 
-export PATH=$PATH:"$HOME/.local/bin:$HOME/.cargo/bin:/var/lib/flatpak/exports/bin:/.local/share/flatpak/exports/bin"
-
-eval "$(starship init bash)"
-eval "$(zoxide init bash)"
-
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-
-exec startx
-
+    exec startx
 fi
-
-export PATH=$PATH:/home/sohaib/.spicetify
-
-(cat .cache/wal/sequences &)
-
-alias y="yazi"
-. "$HOME/.local/share/../bin/env"
