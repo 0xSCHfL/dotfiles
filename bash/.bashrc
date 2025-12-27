@@ -588,14 +588,27 @@ trim() {
 	var="${var%"${var##*[![:space:]]}"}" # remove trailing whitespace characters
 	echo -n "$var"
 }
-# GitHub Titus Additions
 
+# GitHub 0xSCHfL Additions
 gcom() {
   git status
   git add .
   git commit -m "$1"
   git push
 }
+
+dotfiles_update() {
+  echo "Pulling latest changes from dotfiles repo..."
+  git -C ~/Work/dotfiles pull origin main || { echo "Git pull failed"; return 1; }
+
+  echo "Restowing dotfiles symlinks..."
+  stow -R -t ~ bash starship tmux nvim fontconfig wal waybar || { echo "Stow failed"; return 1; }
+
+  echo "Dotfiles updated and restowed successfully!"
+}
+
+alias dupdate='dotfiles_update'
+
 lazyg() {
 	git add .
 	git commit -m "$1"
