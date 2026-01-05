@@ -5,8 +5,8 @@
   "modules-left": [
     "custom/omarchy",
     "hyprland/workspaces",
-    "custom/spotify",
-    "hyprland/window"
+    "custom/spotify"
+    // "hyprland/window"
   ],
 
   "modules-center": [
@@ -53,7 +53,7 @@
       "5": []
     }
   },
-  
+
   "custom/omarchy": {
     "format": "<span font='omarchy'>\ue900</span>",
     "on-click": "omarchy-menu",
@@ -70,11 +70,11 @@
     "interval": 21600
   },
 
-  "clock": { 
-    "timezone": "Africa/Casablanca", 
-    "format": "{:%A, %d %B %Y %H:%M:%S}", 
-    "tooltip-format": "{:%A, %d %B %Y %H:%M:%S}", 
-    "interval": 1 
+  "clock": {
+    "timezone": "Africa/Casablanca",
+    "format": "{:%A, %d %B %Y %H:%M:%S}",
+    "tooltip-format": "{:%A, %d %B %Y %H:%M:%S}",
+    "interval": 1
   },
 
   "custom/uptime": {
@@ -129,8 +129,8 @@
   "pulseaudio": {
     "format": "{icon}  {volume}%",
     "format-muted": "",
-    "format-icons": { 
-      "default": ["","",""] 
+    "format-icons": {
+      "default": ["","",""]
     },
     "on-click": "omarchy-launch-or-focus-tui wiremix",
     "on-click-right": "pamixer -t"

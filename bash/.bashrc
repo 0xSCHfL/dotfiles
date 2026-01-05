@@ -143,7 +143,11 @@ alias freshclam='sudo freshclam'
 alias vi='nvim'
 alias svi='sudo vi'
 alias vis='nvim "+set si"'
+
+# Package Manager
 alias yayf="yay -Slq | fzf --multi --preview 'yay -Sii {1}' --preview-window=down:75% | xargs -ro yay -S"
+alias yays="command yay -S --noconfirm --needed" # Usage: yays pkg1 pkg2
+alias yayd="command yay -Rns --noconfirm"
 
 # Change directory aliases
 alias home='cd ~'
@@ -195,8 +199,11 @@ alias topcpu="/bin/ps -eo pcpu,pid,user,args | sort -k 1 -r | head -10"
 
 # Search files in the current folder
 alias f="find . | grep "
-alias ff="fzf "
+alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
+
+# File Explorer
 alias y="yazi"
+
 # Count all files (recursively) in the current folder
 alias countfiles="for t in files links directories; do echo \`find . -type \${t:0:1} | wc -l\` \$t; done 2> /dev/null"
 
@@ -424,7 +431,7 @@ distribution () {
 #       alias cat='bat'
 # else
 #       alias cat='batcat'
-# fi 
+# fi
 #
 # Show the current version of the operating system
 ver() {
@@ -651,15 +658,11 @@ export PATH=$PATH:"$HOME/.local/bin:$HOME/.cargo/bin:/var/lib/flatpak/exports/bi
 
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"
+eval "$(register-python-argcomplete --no-defaults exegol)"
 
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-
-exec startx
-
+  exec startx
 fi
 
-export PATH=$PATH:/home/sohaib/.spicetify
 
-alias spotify="flatpak run com.spotify.Client"
-
-(cat ~/.cache/wal/sequences &)
+# (cat ~/.cache/wal/sequences &)
