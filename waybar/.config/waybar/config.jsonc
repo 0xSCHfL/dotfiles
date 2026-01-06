@@ -71,13 +71,26 @@
   },
 
   "clock": {
-    "timezone": "Africa/Casablanca",
-    "format": "{:%A, %d %B %Y %H:%M:%S}",
-    "tooltip-format": "{:%A, %d %B %Y %H:%M:%S}",
-    "interval": 1
-  },
+  "timezone": "Africa/Casablanca",
+  "format": "{:%A, %d %B %Y %H:%M:%S}",
+  // "tooltip-format": "{:%A, %d %B %Y %H:%M:%S}",
+  "tooltip-format": "{:%A, %d %B %Y}\n\n{calendar}",
+  "interval": 1,
+  "calendar": {
+    "mode": "month",
+    "mode-mon-col": 3,
+    "on-scroll": 1,
+    "format": {
+      "months": "<span color='#ffead3'><b>{}</b></span>",
+      "days": "<span color='#ecc6d9'>{}</span>",
+      "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+      "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+      "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+    }
+  }
+},
 
-  "custom/uptime": {
+"custom/uptime": {
     "format": " {}",
     "interval": 1600,
     "exec": "~/.config/waybar/scripts/uptime-short.sh"

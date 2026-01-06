@@ -55,6 +55,17 @@
   border-radius: 5px;
   margin: 5px 8px 5px 5px;
 }
+tooltip {
+  background: #101010;
+  border-radius: 8px;
+  border: 1px solid #1e1e1e;
+  padding: 10px;
+}
+
+tooltip label {
+  color: #c6d0f5;
+  font-size: 12px;
+}
 
 #custom-update {
   background: #101010;
