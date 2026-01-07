@@ -72,7 +72,7 @@
 
   "clock": {
   "timezone": "Africa/Casablanca",
-  "format": " {:%A, %d %B %Y %H:%M:%S}",
+  "format": " {:%H:%M:%S %A}",
   "tooltip-format": "{:%A, %d %B %Y}\n\n{calendar}",
   "interval": 1,
   "calendar": {
