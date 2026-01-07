@@ -144,10 +144,68 @@ alias vi='nvim'
 alias svi='sudo vi'
 alias vis='nvim "+set si"'
 
-# Package Manager
-alias yayf="yay -Slq | fzf --multi --preview 'yay -Sii {1}' --preview-window=down:75% | xargs -ro yay -S"
-alias yays="command yay -S --noconfirm --needed" # Usage: yays pkg1 pkg2
-alias yayd="command yay -Rns --noconfirm"
+#### Package Manager
+# Pacman Package Manager
+pacf() {
+  if [ $# -eq 0 ]; then
+    # Interactive search and install
+    pacman -Slq | fzf --multi --preview 'pacman -Si {1}' --preview-window=down:75% --prompt='Install packages: ' | xargs -ro sudo pacman -S --noconfirm --needed
+  else
+    # Direct install
+    sudo pacman -S --noconfirm --needed "$@"
+  fi
+}
+
+paci() {
+  if [ $# -eq 0 ]; then
+    # Interactive search and install
+    pacman -Slq | fzf --multi --preview 'pacman -Si {1}' --preview-window=down:75% --prompt='Install packages: ' | xargs -ro sudo pacman -S --noconfirm --needed
+  else
+    # Direct install
+    sudo pacman -S --noconfirm --needed "$@"
+  fi
+}
+
+pacd() {
+  if [ $# -eq 0 ]; then
+    # Interactive remove installed packages
+    pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' --preview-window=down:75% --prompt='Remove packages: ' | xargs -ro sudo pacman -Rns --noconfirm
+  else
+    # Direct remove
+    sudo pacman -Rns --noconfirm "$@"
+  fi
+}
+
+# Yay Package Manager
+yayf() {
+  if [ $# -eq 0 ]; then
+    # Interactive search and install from AUR + official repos
+    yay -Slq | fzf --multi --preview 'yay -Si {1}' --preview-window=down:75% --prompt='Install packages: ' | xargs -ro yay -S --noconfirm --needed
+  else
+    # Direct install
+    command yay -S --noconfirm --needed "$@"
+  fi
+}
+
+yayi() {
+  if [ $# -eq 0 ]; then
+    # Interactive search and install
+    yay -Slq | fzf --multi --preview 'yay -Si {1}' --preview-window=down:75% --prompt='Install packages: ' | xargs -ro yay -S --noconfirm --needed
+  else
+    # Direct install
+    command yay -S --noconfirm --needed "$@"
+  fi
+}
+
+yayd() {
+  if [ $# -eq 0 ]; then
+    # Interactive remove installed packages
+    yay -Qq | fzf --multi --preview 'yay -Qi {1}' --preview-window=down:75% --prompt='Remove packages: ' | xargs -ro yay -Rns --noconfirm
+  else
+    # Direct remove
+    command yay -Rns --noconfirm "$@"
+  fi
+}
 
 # Change directory aliases
 alias home='cd ~'
@@ -657,12 +715,11 @@ fi
 export PATH=$PATH:"$HOME/.local/bin:$HOME/.cargo/bin:/var/lib/flatpak/exports/bin:/.local/share/flatpak/exports/bin"
 
 eval "$(starship init bash)"
-eval "$(zoxide init bash)"
+eval "$(zoxide init --cmd cd bash)"
 eval "$(register-python-argcomplete --no-defaults exegol)"
 
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
   exec startx
 fi
 
-
-# (cat ~/.cache/wal/sequences &)
+#(cat ~/.cache/wal/sequences &)
