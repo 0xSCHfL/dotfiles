@@ -11,7 +11,9 @@
 
   "modules-center": [
     "clock",
-    "custom/weather",
+    // "custom/weather",
+    "custom/screenrecording-indicator",
+    "custom/voxtype",
     "custom/update"
   ],
 
@@ -61,6 +63,14 @@
     "tooltip-format": "Omarchy Menu\n\nSuper + Alt + Space"
   },
 
+  "custom/screenrecording-indicator": {
+    "on-click": "omarchy-cmd-screenrecord",
+    "exec": "$OMARCHY_PATH/default/waybar/indicators/screen-recording.sh",
+    "signal": 8,
+    "return-type": "json",
+    "format": "{}"
+  },
+
   "custom/update": {
     "format": "",
     "exec": "omarchy-update-available",
@@ -72,7 +82,7 @@
 
   "clock": {
   "timezone": "Africa/Casablanca",
-  "format": " {:%H:%M:%S | %A}",
+  "format": " {:%H:%M:%S }",
   "tooltip-format": "{:%A, %d %B %Y}\n\n{calendar}",
   "interval": 1,
   "calendar": {
@@ -104,9 +114,13 @@
   "battery": {
     "states": { "good": 95, "warning": 30, "critical": 15 },
     "format": "{icon} {capacity}%",
-    "format-icons": ["󰁺","󰁻","󰁼","󰁽","󰁾","󰁿","󰂀","󰂁","󰂂","󰁹"],
     "format-charging": "󰂄 {capacity}%",
-    "tooltip-format": "{timeTo} ({capacity}%)"
+    "tooltip-format": "{timeTo} ({capacity}%)",
+    "format-icons": {
+      "charging": ["󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"],
+      "default": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    },
+    "on-click": "omarchy-menu power"
   },
 
   "custom/network": {
@@ -186,6 +200,8 @@
     "exec": "~/.config/waybar/scripts/spotify-status.sh",
     "interval": 2,
     "on-click": "playerctl --player=spotify play-pause",
+    "on-click-right": "playerctl next",
+    "on-click-middle": "playerctl previous",
     "return-type": "json",
     "format": "{}"
   },
@@ -197,4 +213,3 @@
     "on-click": "xdg-open ."
   }
 }
-

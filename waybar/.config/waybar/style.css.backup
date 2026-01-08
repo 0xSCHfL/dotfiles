@@ -45,7 +45,6 @@
 
 #custom-spotify:hover {
   background: #1e1e1e;
-  color: #babbf1;
 }
 
 /* ─────── CENTER BAR: CLOCK + WEATHER ─────── */

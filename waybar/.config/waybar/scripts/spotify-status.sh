@@ -6,13 +6,13 @@ if playerctl -l | grep -q "^spotify$"; then
     title=$(playerctl --player=spotify metadata title | sed 's/&/\&amp;/g')
 
     if [[ "$status" == "Playing" ]]; then
-        echo "{\"text\":\"  $artist - $title\"}"
+        echo "{\"text\":\"󰜏   $artist - $title 󰜎\",\"class\":\"playing\"}"
     elif [[ "$status" == "Paused" ]]; then
-        echo "{\"text\":\" $artist - $title\"}"
+        echo "{\"text\":\"󰜏  $artist - $title 󰜎\",\"class\":\"paused\"}"
     else
-        echo "{\"text\":\" \"}"
+        echo "{\"text\":\"󰜏  󰜎\",\"class\":\"stopped\"}"
     fi
 else
-    echo "{\"text\":\" Not running\"}"
+    echo "{\"text\":\"󰜏  Not running 󰜎\",\"class\":\"not-running\"}"
 fi
 
