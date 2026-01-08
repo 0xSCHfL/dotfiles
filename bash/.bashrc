@@ -721,5 +721,3 @@ eval "$(register-python-argcomplete --no-defaults exegol)"
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
   exec startx
 fi
-
-#(cat ~/.cache/wal/sequences &)
