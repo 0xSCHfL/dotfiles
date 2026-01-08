@@ -1,5 +1,0 @@
-require("mappings.rust")
-require("mappings.sql")
-require("mappings.markdown")
-require("mappings.jsts")
-require("mappings.go")
