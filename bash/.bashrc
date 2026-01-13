@@ -235,7 +235,7 @@ alias lw='ls -xAh'                # wide listing format
 alias ll='ls -Fls'                # long listing format
 alias labc='ls -lap'              # alphabetical sort
 alias lf="ls -l | egrep -v '^d'"  # files only
-alias ldir="ls -l | egrep '^d'"   # directories only
+alias ld="ls -l | egrep '^d'"   # directories only
 alias lla='ls -Al'                # List and Hidden Files
 alias las='ls -A'                 # Hidden Files
 alias lls='ls -l'                 # List
@@ -262,6 +262,8 @@ alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
 # File Explorer
 alias y="yazi"
 
+# Opencode
+alias opc="opencode"
 # Count all files (recursively) in the current folder
 alias countfiles="for t in files links directories; do echo \`find . -type \${t:0:1} | wc -l\` \$t; done 2> /dev/null"
 

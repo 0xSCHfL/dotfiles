@@ -1,109 +1,37 @@
+/* ===== BASE WAYBAR STYLE (LAYOUT ONLY) ===== */
+
+@import "./theme.css";
+
+/* DO NOT SET BACKGROUND HERE */
 * {
+  color: @foreground;
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+
   font-family: 'Iosevka Term';
   font-size: 13px;
-  min-height: 0;
-  padding: 0 1px;
 }
 
-/* Bar background */
+/* BAR WEIGHT */
 #waybar {
-  background: transparent;
-  color: #c6d0f5;
-  margin: 1px;
+  min-height: 34px;
+  padding: 6px 0;
 }
 
-/* ─────── LEFT BAR: WORKSPACES + MPRIS ─────── */
-#custom-omarchy,
-#workspaces {
-  background: #101010;
-  border-radius: 5px;
-  margin: 5px 0 5px 5px;
-  padding: 0 4px;
-}
+/* CONTAINERS */
+.modules-left { margin-left: 8px; }
+.modules-right { margin-right: 8px; }
 
+/* WORKSPACES */
 #workspaces button {
-  color: #babbf1;
-  padding: 0 0.4rem;
-  border-radius: 5px;
+  all: initial;
+  padding: 4px 10px;
+  margin: 0 2px;
+  min-width: 9px;
 }
 
-#workspaces button.active {
-  color: #99d1db;
-}
-
-#workspaces button:hover {
-  background: #1e1e1e;
-}
-
-#custom-spotify {
-  background: #101010;
-  color: #8caaee; /* Soft blue */
-  padding: 0.3rem 0.6rem;
-  margin: 5px 0 5px 5px;
-  border-radius: 5px;
-}
-
-#custom-spotify:hover {
-  background: #1e1e1e;
-  color: #babbf1;
-}
-
-/* ─────── CENTER BAR: CLOCK + WEATHER ─────── */
-#clock {
-  background: #101010;
-  color: #8caaee; /* Soft blue */
-  padding: 0.3rem 0.6rem;
-  border-radius: 5px;
-  margin: 5px 8px 5px 5px;
-}
-tooltip {
-  background: #101010;
-  border-radius: 8px;
-  border: 1px solid #1e1e1e;
-  padding: 10px;
-}
-
-tooltip label {
-  color: #c6d0f5;
-  font-size: 12px;
-}
-
-#custom-update {
-  background: #101010;
-  color: #8caaee;
-  padding: 0.3rem 0.6rem;
-  border-radius: 5px;
-  margin: 5px 8px;
-}
-
-#custom-update:hover {
-  background: #1e1e1e;
-  color: #babbf1;
-}
-
-#custom-weather {
-  background: #101010;
-  color: #8caaee;
-  padding: 0.3rem 0.6rem;
-  border-radius: 5px;
-  margin: 5px 8px;
-}
-
-#custom-screenrecording-indicator {
-  background: #101010;
-  color: #8caaee; /* Soft blue */
-  padding: 0.3rem 0.6rem;
-  border-radius: 5px;
-  margin: 5px 8px 5px 5px;
-}
-
-#custom-screenrecording-indicator:hover {
-  background: #1e1e1e;
-  color: #babbf1;
-}
-
-
-/* ─────── RIGHT BAR: ALL MODULES ─────── */
+/* UNIFIED MODULE SPACING */
 #custom-uptime,
 #backlight,
 #battery,
@@ -113,72 +41,25 @@ tooltip label {
 #cpu,
 #memory,
 #tray,
-#custom-lock {
-  background: #101010;
-  padding: 0.3rem 0.6rem;
-  margin: 5px 0;
-  border-radius: 0; /* reset border-radius for all except ends */
-  color: inherit;
+#custom-lock,
+#custom-omarchy,
+#custom-screenrecording-indicator,
+#custom-update,
+#clock,
+#custom-voxtype {
+  margin: 0;
+  padding: 4px 8px;
+  /* min-width: 12px; */
 }
 
-/* Rounded left corners only on first right module */
-#custom-uptime {
-  border-radius: 5px 0 0 5px;
-  margin-right: 0;
-  color: #f2d5cf; /* soft peach */
+/* WINDOW */
+#window {
+  margin: 0 6px;
+  padding: 4px 8px;
+  font-size: 10px;
 }
 
-/* Remove margin-right/left to remove gaps between modules */
-#backlight,
-#battery,
-#pulseaudio,
-#custom-network,
-#bluetooth,
-#cpu,
-#memory,
-#tray {
-  margin-left: 0;
-  margin-right: 0;
-}
-
-/* Colors for individual right modules */
-#backlight {
-  color: #e0c090; /* warm yellow */
-}
-
-#battery {
-  color: #99d1db; /* soft blue */
-}
-
-#pulseaudio {
-  color: #ea999c; /* soft red/pink */
-}
-
-#custom-network {
-  color: #ffffff; /* white */
-}
-
-#bluetooth {
-  color: #6ab0f3; /* light blue */
-}
-
-#cpu {
-  color: #e5c890; /* beige */
-}
-
-#memory {
-  color: #a6d189; /* soft green */
-}
-
-/* Rounded right corners only on last right module */
-#custom-lock {
-  border-radius: 0 5px 5px 0;
-  margin-left: 0;
-  margin-right: 5px;
-  color: #babbf1;
-}
-
-/* Hover effect for all right bar modules */
+/* HOVER */
 #custom-uptime:hover,
 #backlight:hover,
 #battery:hover,
@@ -189,66 +70,12 @@ tooltip label {
 #memory:hover,
 #tray:hover,
 #custom-lock:hover {
-  background: #1e1e1e;
-  color: #ffffff;
+  background: rgba(255,255,255,0.08);
 }
 
-/* Disabled / Disconnected colors */
-#custom-network.disconnected {
-  color: #737994; /* softer grey for disconnected */
-}
+/* TOOLTIP */
+tooltip { padding: 6px; }
 
-#bluetooth.disabled {
-  color: #737994;
-}
+/* STATES */
+.hidden { opacity: 0; }
 
-/* Battery states */
-#battery.charging {
-  color: #a6d189;
-}
-
-#battery.full {
-  color: #99d1db;
-}
-
-#battery.critical {
-  color: #ea999c;
-}
-
-/* Tray */
-#tray {
-  margin: 5px 0;
-}
-
-/* Window module */
-#window {
-  background: #101010;
-  color: #a6d189;
-  border-radius: 5px;
-  margin: 5px 8px;
-  padding: 0.4rem 0.8rem;
-  font-size: 10px;
-}
-
-#window:hover {
-  background: #1e1e1e;
-  color: #ffffff;
-}
-
-
-#custom-voxtype {
-  background: #101010;
-  color: #8caaee; /* Soft blue */
-  padding: 0.3rem 0.6rem;
-  border-radius: 5px;
-  margin: 5px 8px 5px 5px;
-}
-
-#custom-voxtype:hover {
-  background: #1e1e1e;
-  color: #babbf1;
-}
-
-#custom-voxtype.recording {
-  color: #a55555;
-}
